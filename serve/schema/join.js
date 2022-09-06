@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('../model/db')
 const { Schema } = mongoose
 /**
  * 纳新表
@@ -72,7 +72,7 @@ const join = new Schema({
 
 })
 
-const joinModel = mongoose.model('join', join)
+const joinModel = mongoose.model('join', join, "join")
 
 module.exports = {
   joinModel

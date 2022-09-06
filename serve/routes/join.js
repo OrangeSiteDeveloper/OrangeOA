@@ -7,10 +7,9 @@ router.post("/submitMsg", async (ctx, next) => {
 
     try {
         const data = req.body.data._value;
-        await joinUs(data);
+        const relt = await joinUs(data);
 
-
-        ctx.body = "success";
+        ctx.body = relt;
         
     } catch (error) {
         console.log(error);
