@@ -19,9 +19,11 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
+    "koa2-cors": "^2.0.6",
+    "mongoose": "^6.5.4",
     "pug": "^2.0.3"
   },
   "devDependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.4"
   }
 }
