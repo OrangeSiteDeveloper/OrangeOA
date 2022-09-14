@@ -17,6 +17,7 @@ const join = new Schema({
    * 意向部门
    * 简短文字描述
    * 面试进度
+   * 面试状态
    * 面试场次
    */
 
@@ -57,6 +58,10 @@ const join = new Schema({
     type: String
   },
   w3review: {
+    default: "",
+    type: String
+  },
+  steps: {
     default: "",
     type: String
   },
