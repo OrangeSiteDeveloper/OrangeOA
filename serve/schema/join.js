@@ -62,11 +62,11 @@ const join = new Schema({
     type: String
   },
   steps: {
-    default: "",
+    default: "1",// 1:报名 2:初试 3:复试 4:加入
     type: String
   },
   status: {
-    default: "",
+    default: "1",// 1:报名 2:初试 3:复试 4:加入
     type: String
   },
   interview: {

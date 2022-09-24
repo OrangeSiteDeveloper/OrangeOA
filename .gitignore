@@ -1,6 +1,8 @@
 .DS_Store
 front/node_modules
 serve/node_modules
+serve/model/db.js
+RegistrationBE
 /dist
 
 
@@ -22,3 +24,4 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+serve/model/db.js

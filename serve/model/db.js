@@ -1,8 +1,8 @@
 // 连接数据库
 const mongoose = require('mongoose');
-
-// 指定数据库地址
-const url = 'mongodb://localhost:27017/OrangeOA'
+const username = "OrangeOA"
+const password = "b046946cf1"
+const url = 'mongodb://' + username +':' +password +'@120.46.212.64:27017/OrangeOA'
 
 //连接数据库
 
