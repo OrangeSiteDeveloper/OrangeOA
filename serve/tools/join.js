@@ -52,7 +52,7 @@ class joinTools {
 
         try {
 
-            return await joinModel.find({ sId });
+            return await joinModel.findOne({ sId });
 
         } catch (error) {
             console.log(error);
