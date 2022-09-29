@@ -75,6 +75,17 @@ class joinTools {
 
     }
 
+    async changeStatus() {
+
+        try {
+
+            return await joinModel.updateMany({}, {status: "2.1"})
+            
+        } catch (error) {
+            
+        }
+    }
+
 
 }
 

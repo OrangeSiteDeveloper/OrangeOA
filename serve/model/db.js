@@ -1,7 +1,7 @@
 // 连接数据库
 const mongoose = require('mongoose');
 const username = "OrangeOA"
-const password = "b046946cf1"
+const password = "GTxj3FASZaFSJtWa"
 const url = 'mongodb://' + username +':' +password +'@120.46.212.64:27017/OrangeOA'
 
 //连接数据库

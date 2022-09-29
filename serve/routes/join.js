@@ -1,5 +1,5 @@
 const router = require("koa-router")();
-const { joinUs, joinStatus, getAllStu } = require("../tools/join")
+const { joinUs, joinStatus, getAllStu, changeStatus } = require("../tools/join")
 
 router.post("/submitMsg", async (ctx, next) => {
     const req = ctx.request;
@@ -38,12 +38,20 @@ router.post("/getAllStu", async (ctx, next) => {
 
     try {
 
-        const secret = req.body.secret._value;
-        if (secret === "") {
-            const relt = await getAllStu();
-        }
+        ctx.body = await getAllStu();
+        
+    } catch (error) {
+        console.log(error);
+    }
 
-        ctx.body = relt;
+})
+
+router.post("/changeStatus", async (ctx, next) => {
+    const req = ctx.request;
+
+    try {
+
+        ctx.body = await changeStatus();
         
     } catch (error) {
         console.log(error);

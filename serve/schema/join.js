@@ -72,6 +72,10 @@ const join = new Schema({
   interview: {
     default: "2022",
     type: String
+  },
+  emailed: {
+    default: false,
+    type: Boolean
   }
 
 

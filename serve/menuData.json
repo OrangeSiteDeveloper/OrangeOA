@@ -1,0 +1,123 @@
+[
+    {
+        "path": "/",
+        "name": "adminIndex",
+        "label": "首页",
+        "icon": "user",
+        "auth": "admin",
+        "isUsed": true,
+        "key": "adminIndex"
+    },
+    {
+        "path": "/",
+        "name": "adminContract",
+        "label": "合同查询",
+        "icon": "user",
+        "auth": "admin",
+        "isUsed": true,
+        "key": "adminContract"
+    },
+    {
+        "path": "/rooterIndex",
+        "name": "rooterIndex",
+        "label": "首页",
+        "icon": "user",
+        "auth": "rooter",
+        "isUsed": true,
+        "key": "rooterIndex"
+    },
+    {
+        "path": "/rooterCreateCompetition",
+        "name": "rooterCreateCompetition",
+        "label": "新建赛事",
+        "icon": "user",
+        "auth": "rooter",
+        "isUsed": true,
+        "key": "rooterCreateCompetition"
+    },
+    {
+        "path": "/rooterCompetitionStore",
+        "name": "rooterCompetitionStore",
+        "label": "赛事商店",
+        "icon": "user",
+        "auth": "rooter",
+        "isUsed": true,
+        "key": "rooterCompetitionStore"
+    },
+    {
+        "path": "/",
+        "name": "userHome",
+        "label": "用户首页",
+        "icon": "user",
+        "auth": "user",
+        "isUsed": true,
+        "key": "userHome"
+    },
+    {
+        "path": "/",
+        "name": "userMarket",
+        "label": "交易市场",
+        "icon": "user",
+        "auth": "user",
+        "isUsed": true,
+        "key": "userMarket"
+    },
+    {
+        "label": "生产管理",
+        "icon": "s-order",
+        "isUsed": true,
+        "key": "userProduct",
+        "auth": "user",
+        "children": [
+            {
+                "path": "/",
+                "name": "nav1",
+                "label": "机器管理",
+                "icon": "s-order",
+                "isUsed": true,
+                "key": "userMachine"
+            },
+            {
+                "path": "/",
+                "name": "nav2",
+                "label": "工厂管理",
+                "icon": "s-order",
+                "isUsed": true,
+                "key": "userFactory"
+            },
+            {
+                "path": "/",
+                "name": "nav2",
+                "label": "生产合同",
+                "icon": "s-order",
+                "isUsed": true,
+                "key": "userProductContract"
+            }
+        ]
+    },
+    {
+        "label": "交易管理",
+        "icon": "s-order",
+        "isUsed": true,
+        "key": "userTransaction",
+        "auth": "user",
+        "children": [
+            {
+                "path": "/",
+                "name": "nav2",
+                "label": "交易合同",
+                "icon": "s-order",
+                "isUsed": true,
+                "key": "userTransactionContract"
+            },
+            {
+                "path": "/",
+                "name": "nav3",
+                "label": "交易处理",
+                "icon": "s-order",
+                "isUsed": true,
+                "key": "userTransactionDeal"
+            }
+        ]
+    }
+]
