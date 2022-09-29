@@ -25,7 +25,7 @@ router.post("/queryStatus", async (ctx, next) => {
         const sId = req.body.sId._value;
         const relt = await joinStatus(sId);
 
-        ctx.body = relt.steps;
+        ctx.body = relt.status;
         
     } catch (error) {
         console.log(error);
