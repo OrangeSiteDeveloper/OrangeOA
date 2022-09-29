@@ -35,8 +35,8 @@ async function sendMail(from, to, subject) {
             port: 465,
             secure: true,
             auth: {
-                user: "1830975557@qq.com", // 发送方账号
-                pass: "mpfhtoxkpvbsejch"  // 授权码
+                user: "", // 发送方账号
+                pass: ""  // 授权码
             }
         });
 
