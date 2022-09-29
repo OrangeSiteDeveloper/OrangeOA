@@ -1,4 +1,6 @@
 const nodemailer = require("nodemailer");
+const fs = require("fs");
+const path = require("path");
 
 /**
  * 发送邮件
@@ -29,14 +31,17 @@ async function sendMail(from, to, subject) {
         <br />
         橙果工作室
         `
+        // 获取账号、授权码
+        const data = JSON.parse(fs.readSync(path.join(__dirname, "../../ini.json"), "utf8")).email;
+
         // 创建nodemailer传输器
         let transporter = nodemailer.createTransport({
             host: "smtp.qq.com",
             port: 465,
             secure: true,
             auth: {
-                user: "1830975557@qq.com", // 发送方账号
-                pass: "mpfhtoxkpvbsejch"  // 授权码
+                user: data.user, // 发送方账号
+                pass: data.pass  // 授权码
             }
         });
 
