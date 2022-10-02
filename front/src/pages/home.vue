@@ -8,7 +8,7 @@
         <el-header>
           <el-row type="flex" justify="end">
             <el-col :span="2">
-              <el-button round @click="test">一键发送!</el-button>
+              <!-- <el-button round @click="test">一键发送!</el-button> -->
               <el-button round @click="logout">退出</el-button>
             </el-col>
           </el-row>
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     test() {
-      axios.post("http://localhost:3000/api/join/changeStatus").then(
+      axios.post("http://localhost:3000/api/email/sendMail").then(
         (res) => {
           console.log(res.data);
         },

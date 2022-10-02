@@ -80,7 +80,7 @@ router.beforeEach((to, from, next) => {
     next('/')
   }
   else if ((token == null || token == '') && (to.path !== '/login' && to.path !== "/loginRooter" && to.path !== "/register")) {
-    Vue.prototype.$message({ message: "登录过期", type: "warning" })
+    Vue.prototype.$message({ message: "请先登录", type: "warning" })
     next('/login')
   }
   else if ((token == null || token == '') && (to.path == "/login" || to.path == "/loginRooter" || to.path == "/register")) {

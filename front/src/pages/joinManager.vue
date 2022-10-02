@@ -1,5 +1,9 @@
 <template>
-  <PFTable tittle="面试管理" :tableColumn="tableColumn" :tableData="tableData" :pageSize="10"></PFTable>
+  <PFTable 
+  tittle="面试管理" 
+  :tableColumn="tableColumn" 
+  :tableData="tableData" 
+  :pageSize="10"></PFTable>
 </template>
 
 <script>
@@ -54,13 +58,13 @@ export default {
           isShow: true,
           filters: [
             { text: "web", value: "web" },
-            { text: "programming", value: "programming"},
-            { text: "bigData", value: "bigData"},
-            { text: "embedded", value: "embedded"},
-            { text: "hardware", value: "hardware"},
+            { text: "programming", value: "programming" },
+            { text: "bigData", value: "bigData" },
+            { text: "embedded", value: "embedded" },
+            { text: "hardware", value: "hardware" },
           ],
           filterVal: [
-          "web", "programming", "bigData", "embedded", "hardware" 
+            "web", "programming", "bigData", "embedded", "hardware"
           ]
         },
         {
@@ -81,27 +85,43 @@ export default {
         {
           label: "面试状态",
           value: "status",
-          isShow:  true,
+          isShow: true,
           filters: [
             { text: "2.1", value: "2.1" },
-            { text: "2.2", value: "2.2"},
+            { text: "2.2", value: "2.2" },
           ],
           filterVal: [
-          "2.1", "2.2"
+            "2.1", "2.2"
           ]
         },
         {
           label: "面试场次",
           value: "interview",
           isShow: false,
+        },
+        {
+          label: "操作",
+          value: "operate",
+          isShow: true,
+          buttons: [
+            {
+              url: "/",
+              label: "提交",
+              methods: "post"
+            },
+            {
+              url: "/1",
+              label: "测试",
+              methods: "get"
+            }
+          ]
         }
-        
       ],
       tableData: []
     }
   },
   created: function () {
-    const baseUrl = "http://localhost:3000/api/join";
+    const baseUrl = "https://api.orangestudio.cn/api/join";
 
     axios.post(baseUrl + "/getAllStu").then(
       (res) => {

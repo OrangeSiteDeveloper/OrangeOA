@@ -12,23 +12,26 @@
       <div slot="header" class="clearfix" style="padding: 25px 40px">
         <h2 style="float: left">{{ tittle }}</h2>
         <el-button @click="clearFilter" style="float: right" type="text">清除所有过滤器</el-button>
-        <el-button @click="reGetData" style="float: right; padding-right: 5px;" type="text">重新获取数据</el-button>
+        <el-button @click="reGetData" style="float: right; padding-right: 5px;" type="text">重新渲染数据</el-button>
       </div>
       <div>
         <el-table ref="filterTable" :data="showData" style="width: 100%" @filter-change="filterChange">
           <el-table-column type="expand">
             <template slot-scope="props">
               <el-form label-position="left" inline class="demo-table-expand">
-                <el-form label-position="left" inline class="demo-table-expand">
-                  <el-form-item v-for="(item, index) in tableColumn" :key="index" :label="item.label">
-                    <span>{{ props.row[item.value] }}</span>
-                  </el-form-item>
-                </el-form>
+                <el-form-item v-for="(item, index) in tableColumn.filter((item)=> !item.isShow)" :key="index"
+                  :label="item.label">
+                  <span>{{ props.row[item.value] }}</span>
+                </el-form-item>
               </el-form>
             </template>
           </el-table-column>
           <el-table-column v-for="(item, index) in isTittle" :key="index" :label="item.label" :prop="item.value"
             :filters="item.filters" :column-key="item.value">
+            <template #default="scope" v-if="item.value === 'operate'">
+              <OButton v-for="(item1, index1) in item.buttons" :key="index1" :url="item1.url" :subData="scope.row" :label="item1.label" :methods="item1.methods">
+              </OButton>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -43,6 +46,8 @@
 
 
 <script>
+import oButton from "./oButton.vue"
+import OButton from "./oButton.vue";
 export default {
   name: "pageFilterTable",
   data() {
@@ -53,10 +58,14 @@ export default {
     };
   },
   props: ["tableData", "tittle", "tableColumn", "pageSize"],
+  components: { oButton, OButton },
   computed: {
     isTittle() {
       return this.tableColumn.filter((item) => item.isShow);
     },
+    getTableData() {
+      return this.tableData;
+    }
   },
   methods: {
     reGetData() {
@@ -95,10 +104,18 @@ export default {
     }
   },
   mounted() {
-    this.showData = this.tableData.slice(0, this.pageSize);
+    // this.showData = this.tableData.slice(0, this.pageSize);
     const filters = this.tableColumn.filter((item) => item.filters);
     for (let i = 0; i < filters.length; i++) {
       this.Filter[filters[i].value] = filters[i].filterVal;
+    }
+  },
+  watch: {
+    getTableData(newVal) {
+      if (newVal) {
+        this.filterData = this.tableData;
+        this.showData = this.tableData.slice(0, this.pageSize);
+      }
     }
   }
 
