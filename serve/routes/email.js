@@ -9,29 +9,26 @@ router.post('/sendMail', async (ctx, next) => {
  
         const secret = req.body.secret;
         // const from = req.body.from;
-        const from = "1830975557@qq.com";
+        const from = "2251944982@qq.com";
         // const to = req.body.to;
-        // const to = "849348480@qq.com";
+        const to = "2251944982@qq.com";
         // const subject = req.body.subject;
-        const subject = "橙果工作室2022年面试通知";
+        const subject = "橙果工作室2022年二面通知";
         const text = req.body.text;
 
-        const joinData = await joinModel.find();
-        joinModel.updateMany({}, { emailed: true })
-
-
-        for (let i = 0; i < joinData.length/2; i++) {
-            console.log(i);
-            // sendMail(from, joinData[i]["sEmail"], subject);
-        }
-        // const info = await sendMail(from, "849348480@qq.com", subject);
+        // const joinData = await joinModel.find({"status" : "2.1"});
+        // joinModel.updateMany({}, { emailed: true })
+        // const info = sendMail(from, to, subject);
         // console.log(info);
 
-        // console.log(to);
-        for (let i = Math.ceil(joinData.length/2); i < joinData.length; i++) {
-            // console.log(i);
-            sendMail(from, joinData[i]["sEmail"], subject);
-        }
+        // console.log(joinData);
+        sendMail(from, to, subject);
+        // for (let i = 80; i < joinData.lne; i++) {
+        //     console.log(joinData[i]["sEmail"]);
+        // }
+
+        ctx.body = "";
+
 
     } catch (error) {
         console.log(error);
