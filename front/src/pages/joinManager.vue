@@ -89,6 +89,8 @@ export default {
           filters: [
             { text: "2.1", value: "2.1" },
             { text: "2.2", value: "2.2" },
+            { text: "3.1", value: "3.1" },
+            { text: "3.2", value: "3.2" },
           ],
           filterVal: [
             "2.1", "2.2"
@@ -105,14 +107,14 @@ export default {
           isShow: true,
           buttons: [
             {
-              url: "/",
-              label: "提交",
+              url: "/join/pass",
+              label: "通过",
               methods: "post"
             },
             {
-              url: "/1",
-              label: "测试",
-              methods: "get"
+              url: "/join/fail",
+              label: "不通过",
+              methods: "post"
             }
           ]
         }

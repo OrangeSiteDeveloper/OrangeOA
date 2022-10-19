@@ -8,7 +8,6 @@
         <el-header>
           <el-row type="flex" justify="end">
             <el-col :span="2">
-              <!-- <el-button round @click="test">一键发送!</el-button> -->
               <el-button round @click="logout">退出</el-button>
             </el-col>
           </el-row>
@@ -21,7 +20,7 @@
         <el-footer>
           <h4>
             Copyright &copy; 2019-2022 &nbsp;Daisy &nbsp;Version:
-            1.0.0-220928 &nbsp;
+            1.0.0-2210072010 &nbsp;
           </h4>
         </el-footer>
       </el-container>
