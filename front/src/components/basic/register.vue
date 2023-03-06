@@ -52,7 +52,7 @@
         </el-main>
         <el-footer>
           <h4>
-            Copyright &copy; 2019-2022 &nbsp;Daisy &nbsp;Version: 3.0.0-Alpha-220808
+            Copyright &copy; 2019-2023 &nbsp;OrangeOA &nbsp;Version: 1.1.0-2303062143
             &nbsp;
           </h4>
         </el-footer>

@@ -29,8 +29,8 @@
           <el-table-column v-for="(item, index) in isTittle" :key="index" :label="item.label" :prop="item.value"
             :filters="item.filters" :column-key="item.value">
             <template #default="scope" v-if="item.value === 'operate'">
-              <OButton v-for="(item1, index1) in item.buttons" :key="index1" :url="item1.url" :subData="scope.row" :label="item1.label" :methods="item1.methods">
-              </OButton>
+              <oButton v-for="(item1, index1) in item.buttons" :key="index1" :url="item1.url" :subData="scope.row" :label="item1.label" :methods="item1.methods">
+              </oButton>
             </template>
           </el-table-column>
         </el-table>
@@ -47,7 +47,6 @@
 
 <script>
 import oButton from "./oButton.vue"
-import OButton from "./oButton.vue";
 export default {
   name: "pageFilterTable",
   data() {
@@ -58,7 +57,7 @@ export default {
     };
   },
   props: ["tableData", "tittle", "tableColumn", "pageSize"],
-  components: { oButton, OButton },
+  components: { oButton },
   computed: {
     isTittle() {
       return this.tableColumn.filter((item) => item.isShow);

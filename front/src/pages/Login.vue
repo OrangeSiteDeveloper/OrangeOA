@@ -64,7 +64,8 @@ export default {
   },
   methods: {
     login(loginRules) {
-      const baseUrl = "https://api.orangestudio.cn/api";
+      // const baseUrl = "https://api.orangestudio.cn/api";
+      const baseUrl = "http://127.0.0.1:3002/api";
       this.$refs[loginRules].validate((valid) => {
         if (valid) {
           axios

@@ -98,6 +98,7 @@ export default {
   },
   created: function () {
     const baseUrl = "https://api.orangestudio.cn/api/base";
+    // const baseUrl = "http://127.0.0.1:3002/api/base";
 
     axios.get(baseUrl + "/navBar").then(
       (res) => {

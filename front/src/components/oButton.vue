@@ -14,7 +14,8 @@ export default {
   props: ["url", "subData", "label", "methods"],
   methods: {
     submit() {
-      const baseUrl = "https://api.orangestudio.cn"
+      const baseUrl = "https://api.orangestudio.cn/api"
+      console.log(baseUrl + this.url);
       axios[this.methods](baseUrl + this.url, { data: this.subData }).then(
         (res) => {
           this.$store.commit("msgAlert", {

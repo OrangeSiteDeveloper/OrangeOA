@@ -19,8 +19,8 @@
         </el-main>
         <el-footer>
           <h4>
-            Copyright &copy; 2019-2022 &nbsp;Daisy &nbsp;Version:
-            1.0.0-2210072010 &nbsp;
+            Copyright &copy; 2019-2023 &nbsp;OrangeOA &nbsp;Version:
+            1.1.0-2303062143 &nbsp;
           </h4>
         </el-footer>
       </el-container>
@@ -46,16 +46,6 @@ export default {
     };
   },
   methods: {
-    test() {
-      axios.post("http://localhost:3000/api/email/sendMail").then(
-        (res) => {
-          console.log(res.data);
-        },
-        (err) => {
-          console.log(err.message);
-        }
-      );
-    },
     logout() {
       this.$cookies.remove("token");
       this.$router.push("/login");

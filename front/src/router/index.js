@@ -17,6 +17,12 @@ const userRouter = [
     meta: { auth: 'root' },
     component: () => import('@/pages/joinManager.vue')
   },
+  {
+    path: 'bookManager',
+    name: "bookManager",
+    meta: { auth: 'root' },
+    component: () => import('@/pages/bookManager.vue')
+  },
 ]
 
 // 配置路由
