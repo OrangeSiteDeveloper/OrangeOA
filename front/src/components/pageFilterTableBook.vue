@@ -40,7 +40,7 @@
     <el-dialog title="图书录入" :visible.sync="bookImportFormVisible" width="30%">
       <el-form :model="bookImportForm">
         <el-form-item label="图书编号:" :label-width="formLabelWidth">
-          <el-input v-model="bookImportForm.bookId" autocomplete="off" @focus="getCode('import')"></el-input>
+          <el-input v-model="bookImportForm.bookId" autocomplete="off" v-focus></el-input>
         </el-form-item>
         <el-form-item label="图书名称:" :label-width="formLabelWidth">
           <el-input v-model="bookImportForm.bookName" autocomplete="off"></el-input>
@@ -58,7 +58,7 @@
     <el-dialog title="图书借阅" :visible.sync="bookBorrowingFormVisible" width="30%">
       <el-form :model="bookBorrowingForm">
         <el-form-item label="图书编号:" :label-width="formLabelWidth">
-          <el-input v-model="bookBorrowingForm.bookId" autocomplete="off" @focus="getCode('borrowing')"></el-input>
+          <el-input v-model="bookBorrowingForm.bookId" autocomplete="off" ref="elInput" v-focus @blur="searchBookStatus(bookBorrowingForm.bookId)"></el-input>
         </el-form-item>
         <el-form-item label="图书名称:" :label-width="formLabelWidth">
           {{ bookBorrowingForm.bookName }}
@@ -154,40 +154,6 @@ export default {
       }
       this.showData = this.filterData.slice(0, this.pageSize);
     },
-    getCode(situation) {
-      //   监听扫码
-      window.document.onkeydown = (e) => {
-        if (e.key = " ") {
-          // 键盘回车事件
-          if (this.code.length < 3) return; // 扫码枪的速度很快，手动输入的时间不会让code的长度大于2，所以这里不会对扫码枪有效
-          if (situation === "import") this.importCode(this.code);
-          if (situation === "borrowing") this.borrowingCode(this.code);
-          this.lastCode = "";
-          this.lastTime = "";
-          return;
-        }
-
-        this.nextTime = new Date().getTime();
-        if (
-          this.lastCode &&
-          this.lastTime &&
-          this.nextTime - this.lastTime > 500
-        ) {
-          // 当扫码前有keypress事件时,防止首字缺失
-          this.code = e.key;
-        } else if (this.lastCode && this.lastTime) {
-          this.code += e.key;
-        }
-        this.lastCode = this.nextCode;
-        this.lastTime = this.nextTime;
-      }
-    },
-    importCode(code) {
-      this.bookImportForm.bookId = code;
-    },
-    borrowingCode(code) {
-      this.bookImportForm.bookId = code;
-    },
     bookImportClick() {
       const date = new Date();
       let year = date.getFullYear() // 年
@@ -231,6 +197,10 @@ export default {
             });
           }
         )
+    },
+    searchBookStatus(id) {
+      if(id) console.log("我要查找id是:" + id + "的这本书");
+      else this.$refs.elInput.focus()
     }
   },
   mounted() {

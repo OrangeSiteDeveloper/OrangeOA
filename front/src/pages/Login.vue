@@ -28,7 +28,7 @@
         </el-main>
         <el-footer>
           <h4>
-            Copyright &copy; 2019-2022 &nbsp;OrangeOA &nbsp;Version: 1.0.0-2209271845
+            Copyright &copy; 2019-2023 &nbsp;OrangeOA &nbsp;Version: 1.1.0-2303081330
             &nbsp;
           </h4>
         </el-footer>
