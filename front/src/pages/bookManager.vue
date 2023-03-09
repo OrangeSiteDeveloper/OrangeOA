@@ -32,6 +32,11 @@ export default {
           value: "status",
           isShow: true,
         },
+        {
+          label: "借阅人",
+          value: "borrowPeopleName",
+          isShow: true,
+        },
         // {
         //   label: "操作",
         //   value: "operate",
@@ -54,8 +59,8 @@ export default {
     }
   },
   created: function () {
-    const baseUrl = "https://api.orangestudio.cn/api/book";
-    // const baseUrl = "http://127.0.0.1:3002/api/book";
+    // const baseUrl = "https://api.orangestudio.cn/api/book";
+    const baseUrl = "http://127.0.0.1:3002/api/book";
 
     axios.get(baseUrl + "/getAllBook").then(
       (res) => {

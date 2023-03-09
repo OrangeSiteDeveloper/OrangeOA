@@ -14,7 +14,7 @@
         </el-header>
         <el-main>
           <transition name="main" mode="out-in">
-            <router-view></router-view>
+            <router-view v-if="isViewAlive"></router-view>
           </transition>
         </el-main>
         <el-footer>
@@ -37,12 +37,18 @@ export default {
   components: {
     navBar,
   },
+  provide() {
+    return {
+      reLoad: this.reLoad
+    }
+  },
   data() {
     return {
       width: "400px",
       height: "400px",
       account: sessionStorage.getItem("account"),
       competition: sessionStorage.getItem("competition"),
+      isViewAlive: true
     };
   },
   methods: {
@@ -51,6 +57,12 @@ export default {
       this.$router.push("/login");
       this.$store.commit("msgAlert", { message: "退出成功", type: "success" });
     },
+    reLoad() {
+      this.isViewAlive = false;
+      this.$nextTick(() => {
+        this.isViewAlive = true;
+      })
+    }
   },
   mounted: function () {},
 };

@@ -38,11 +38,11 @@
 
 
     <el-dialog title="图书录入" :visible.sync="bookImportFormVisible" width="30%">
-      <el-form :model="bookImportForm">
-        <el-form-item label="图书编号:" :label-width="formLabelWidth">
-          <el-input v-model="bookImportForm.bookId" autocomplete="off" v-focus></el-input>
+      <el-form :model="bookImportForm" :rules="bookImportRules" ref="bookImportForm">
+        <el-form-item label="图书编号:" :label-width="formLabelWidth" prop="bookId">
+          <el-input v-model="bookImportForm.bookId" autocomplete="off" v-focus ref="bookImportIdInput"></el-input>
         </el-form-item>
-        <el-form-item label="图书名称:" :label-width="formLabelWidth">
+        <el-form-item label="图书名称:" :label-width="formLabelWidth" prop="bookName">
           <el-input v-model="bookImportForm.bookName" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="入库时间:" :label-width="formLabelWidth">
@@ -51,14 +51,15 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="bookImportFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="importBook">录 入</el-button>
+        <el-button type="primary" @click="importBook('bookImportForm')">录 入</el-button>
       </div>
     </el-dialog>
 
     <el-dialog title="图书借阅" :visible.sync="bookBorrowingFormVisible" width="30%">
-      <el-form :model="bookBorrowingForm">
-        <el-form-item label="图书编号:" :label-width="formLabelWidth">
-          <el-input v-model="bookBorrowingForm.bookId" autocomplete="off" ref="elInput" v-focus @blur="searchBookStatus(bookBorrowingForm.bookId)"></el-input>
+      <el-form :model="bookBorrowingForm" :rules="bookBorrowingRules" ref="bookBorrowingForm">
+        <el-form-item label="图书编号:" :label-width="formLabelWidth" prop="bookId">
+          <el-input v-model="bookBorrowingForm.bookId" autocomplete="off" v-focus ref="elInput"
+            @blur="searchBookStatus(bookBorrowingForm.bookId)"></el-input>
         </el-form-item>
         <el-form-item label="图书名称:" :label-width="formLabelWidth">
           {{ bookBorrowingForm.bookName }}
@@ -70,7 +71,7 @@
           {{ bookBorrowingForm.status }}
         </el-form-item>
         <el-form-item label="借阅人:" v-if="bookBorrowingForm.status === 'borrowed'" :label-width="formLabelWidth">
-          {{ bookBorrowingForm.peopleName }}
+          {{ bookBorrowingForm.borrowPeopleName }}
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -103,10 +104,18 @@ export default {
         bookId: "",
         bookName: "",
         importTime: "",
+        borrowTime: "",
         status: "",
-        peopleName: ""
+        borrowPeopleName: ""
       },
-      formLabelWidth: '80px'
+      formLabelWidth: '90px',
+      bookImportRules: {
+        bookId: [{ required: true, message: "请扫描书籍条形码" }],
+        bookName: [{ required: true, message: "请输入书籍名称" }],
+      },
+      bookBorrowingRules: {
+        bookId: [{ required: true, message: "请扫描书籍条形码" }]
+      }
     };
   },
   props: ["tableData", "tittle", "tableColumn", "pageSize"],
@@ -119,6 +128,7 @@ export default {
       return this.tableData;
     },
   },
+  inject: ['reLoad'],
   methods: {
     reGetData() {
       this.filterData = this.tableData;
@@ -180,26 +190,48 @@ export default {
       this.bookImportFormVisible = true;
       this.bookImportForm.importTime = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
     },
-    importBook() {
-      this.bookImportFormVisible = false;
-      const baseUrl = "https://api.orangestudio.cn/api";
-      // const baseUrl = "http://127.0.0.1:3002/api/book";
-      axios.post(baseUrl + "/importBook", { data: this.bookImportForm })
-        .then(
-          (res) => {
-            console.log(res.data);
-          },
-          (err) => {
-            console.log(err);
-            this.$store.commit("msgAlert", {
-              message: "服务器繁忙, 请求失败",
-              type: "error",
-            });
-          }
-        )
+    importBook(bookImportRules) {
+      // const baseUrl = "https://api.orangestudio.cn/api";
+      const baseUrl = "http://127.0.0.1:3002/api/book";
+
+      this.$refs[bookImportRules].validate((validate) => {
+        if (validate) {
+          axios.post(baseUrl + "/importBook", { data: this.bookImportForm })
+            .then(
+              (res) => {
+                if (res.data === "success") {
+                  this.$store.commit("msgAlert", {
+                    message: "录入成功",
+                    type: "success",
+                  });
+                  this.reLoad();
+                  // this.bookImportFormVisible = false;
+                } else if (res.data === "hasBook") {
+                  this.$store.commit("msgAlert", {
+                    message: "请勿重复录入",
+                    type: "warning",
+                  });
+                  this.bookImportForm.bookId = "";
+                  this.$refs.bookImportIdInput.focus();
+                }
+              },
+              (err) => {
+                console.log(err);
+                this.$store.commit("msgAlert", {
+                  message: "服务器繁忙, 请求失败",
+                  type: "error",
+                });
+              }
+            )
+        } else {
+          return false;
+        }
+      })
+
+
     },
     searchBookStatus(id) {
-      if(id) console.log("我要查找id是:" + id + "的这本书");
+      if (id) console.log("我要查找id是:" + id + "的这本书");
       else this.$refs.elInput.focus()
     }
   },
