@@ -1,5 +1,5 @@
 const router = require("koa-router")();
-const { joinUs, joinStatus, getAllStu, changeStatus } = require("../tools/join")
+const { joinUs, joinStatus, getAllStu, changeStatus, pass, fail } = require("../tools/join")
 
 router.post("/submitMsg", async (ctx, next) => {
     const req = ctx.request;
@@ -59,4 +59,35 @@ router.post("/changeStatus", async (ctx, next) => {
 
 })
 
+router.post("/pass", async (ctx, next) => {
+    const req = ctx.request;
+
+    try {
+
+        const sId = req.body.data.sId;
+
+        ctx.body = await pass(sId);
+        
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
+router.post("/fail", async (ctx, next) => {
+    const req = ctx.request;
+
+    try {
+
+        const sId = req.body.data.sId;
+
+        ctx.body = await fail(sId);
+        
+        
+    } catch (error) {
+        console.log(error);
+    }
+
+})
 module.exports = router;

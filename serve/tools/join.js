@@ -82,10 +82,33 @@ class joinTools {
             return await joinModel.updateMany({}, {status: "2.1"})
             
         } catch (error) {
-            
+            console.log(error);
         }
     }
 
+    async pass(sId) {
+
+        try {
+
+            return await joinModel.updateOne({sId}, {status: "3.1", step: "3.1"})
+            
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+    
+    async fail(sId) {
+
+        try {
+
+            return await joinModel.updateOne({sId}, {status: "3.2", step: "3.2"})
+            
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
 
 }
 
