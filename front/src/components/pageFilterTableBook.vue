@@ -191,8 +191,8 @@ export default {
       this.bookImportForm.importTime = year + "-" + month + "-" + day + " " + hour + ":" + minutes + ":" + seconds;
     },
     importBook(bookImportRules) {
-      // const baseUrl = "https://api.orangestudio.cn/api";
-      const baseUrl = "http://127.0.0.1:3002/api/book";
+      const baseUrl = "https://api.orangestudio.cn/api";
+      // const baseUrl = "http://127.0.0.1:3002/api/book";
 
       this.$refs[bookImportRules].validate((validate) => {
         if (validate) {

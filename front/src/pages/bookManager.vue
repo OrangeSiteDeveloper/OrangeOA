@@ -59,8 +59,8 @@ export default {
     }
   },
   created: function () {
-    // const baseUrl = "https://api.orangestudio.cn/api/book";
-    const baseUrl = "http://127.0.0.1:3002/api/book";
+    const baseUrl = "https://api.orangestudio.cn/api/book";
+    // const baseUrl = "http://127.0.0.1:3002/api/book";
 
     axios.get(baseUrl + "/getAllBook").then(
       (res) => {
